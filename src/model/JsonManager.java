@@ -1,13 +1,17 @@
+package model;
+
+import model.list.CustomList;
+import Model.City;
+import Model.Connection;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class JsonManager {
 
-    //City params
+    //model.City params
     private final static String CITIES = "cities";
     private final static String CITY_NAME = "name";
     private final static String CITY_ADDRESS = "address";
@@ -15,7 +19,7 @@ public class JsonManager {
     private final static String CITY_LATITUDE = "latitude";
     private final static String CITY_LONGITUDE = "longitude";
 
-    //Connection params
+    //model.Connection params
     private final static String CONNECTIONS = "connections";
     private final static String CONNECTION_FROM = "from";
     private final static String CONNECTION_TO = "to";
@@ -33,18 +37,17 @@ public class JsonManager {
 
         //Prepare data
         JSONArray jsonArray = new JSONObject(content).getJSONArray(CITIES);
-        List<City> cities = new ArrayList<>();
+        List cities = new CustomList();
 
         //Get data
         for(int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            City city = new City();
-            city.setName(jsonObject.getString(CITY_NAME));
-            city.setAddress(jsonObject.getString(CITY_ADDRESS));
-            city.setCountry(jsonObject.getString(CITY_COUNTRY));
-            city.setLatitude(jsonObject.getDouble(CITY_LATITUDE));
-            city.setLongitude(jsonObject.getDouble(CITY_LONGITUDE));
-            cities.add(city);
+            String name = jsonObject.getString(CITY_NAME);
+            String address = jsonObject.getString(CITY_ADDRESS);
+            String country = jsonObject.getString(CITY_COUNTRY);
+            double latitude = jsonObject.getDouble(CITY_LATITUDE);
+            double longitude = jsonObject.getDouble(CITY_LONGITUDE);
+            cities.add(new City(name, address, country, latitude, longitude));
         }
 
         return cities;
@@ -55,17 +58,16 @@ public class JsonManager {
 
         //Prepare data
         JSONArray jsonArray = new JSONObject(content).getJSONArray(CONNECTIONS);
-        List<Connection> connections = new ArrayList<>();
+        List connections = new CustomList();
 
         //Get data
         for(int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            Connection connection = new Connection();
-            connection.setFrom(jsonObject.getString(CONNECTION_FROM));
-            connection.setTo(jsonObject.getString(CONNECTION_TO));
-            connection.setDistance(jsonObject.getLong(CONNECTION_DISTANCE));
-            connection.setDuration(jsonObject.getLong(CONNECTION_DURATION));
-            connections.add(connection);
+            String from = jsonObject.getString(CONNECTION_FROM);
+            String to = jsonObject.getString(CONNECTION_TO);
+            int distance = jsonObject.getInt(CONNECTION_DISTANCE);
+            int duration = jsonObject.getInt(CONNECTION_DURATION);
+            connections.add(new Connection(from, to, distance, duration));
         }
 
         return connections;

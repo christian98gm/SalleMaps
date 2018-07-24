@@ -1,14 +1,22 @@
+import Model.City;
+import Model.Connection;
+import model.DestinationCity;
+import model.GoogleManager;
+import model.JsonManager;
+import model.graph.Graph;
+import model.list.CustomList;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
-public class OptionManager {
+public class OptionManager implements GoogleManager.CityCallback, GoogleManager.ConnectionsCallback {
 
     //Raw path
-    private final static String RAW_PATH = "raw/";
+    private final static String RAW_DIR = "raw" + System.getProperty("file.separator");
 
     //Possible options
     private final static int IMPORT = 1;
@@ -16,27 +24,42 @@ public class OptionManager {
     private final static int ROUTE = 3;
     private final static int EXIT = 4;
 
-    //Managers
-    private MapGraph mapGraph;
+    //Max connections
+    private final static int MAX_CONNECTIONS = 20;
 
-    public OptionManager() {}
+    //Managers
+    private Graph graph;
+    private GoogleManager googleManager;
+
+    public OptionManager() {
+        googleManager = GoogleManager.getInstance();
+    }
 
     public boolean optionChosen(int option) {
+        Menu menu = new Menu();
         switch(option) {
             case IMPORT:
                 importMap();
                 return false;
             case SEARCH:
+                if(graph != null) {
+                    searchCity();
+                } else {
+                    menu.notifyUnavailableOption();
+                }
                 return false;
             case ROUTE:
+                if(graph != null) {
+                    System.out.println("In progress...");
+                } else {
+                    menu.notifyUnavailableOption();
+                }
                 return false;
             case EXIT:
-                System.out.println();
-                System.out.println("Thanks for using our services!");
+                menu.notifyExit();
                 return true;
             default:
-                System.out.println();
-                System.out.println("Selected option out of range [1, 4]!");
+                menu.notifyInvalidIntRange();
                 return false;
         }
     }
@@ -56,7 +79,7 @@ public class OptionManager {
                 try {
 
                     //Read file as text
-                    BufferedReader br = new BufferedReader(new FileReader(RAW_PATH + menu.getOptionString()));
+                    BufferedReader br = new BufferedReader(new FileReader(RAW_DIR  + menu.getOptionString()));
                     StringBuilder sb = new StringBuilder();
                     String line = br.readLine();
 
@@ -72,7 +95,13 @@ public class OptionManager {
                     List<Connection> connections = jsonManager.getConnections();
 
                     //Create graph
-                    mapGraph = new MapGraph(cities, connections);
+                    graph = new Graph();
+                    for(City city : cities) {
+                        graph.addCity(city);
+                    }
+                    for(Connection connection : connections) {
+                        graph.addConnection(connection);
+                    }
 
                     //All ok
                     importOk = true;
@@ -87,10 +116,93 @@ public class OptionManager {
                     System.out.println(e2.getMessage());
                 }
 
+            } else {
+                menu.notifyEmptyOption();
             }
 
         } while(!importOk);
 
+    }
+
+    private void searchCity() {
+
+        Menu menu = new Menu();
+        boolean notEmpty;
+
+        do {
+
+            notEmpty = false;
+            menu.askForCity();
+
+            if(!menu.isOptionEmpty()) {
+
+                notEmpty = true;
+
+                //Check if requested city exists
+                if(!graph.containsCity(menu.getOptionString())) {
+                    googleManager.getNewCity(menu.getOptionString(), this);
+                } else {
+                    showCityData(graph.getCityData(menu.getOptionString()));
+                }
+
+            } else {
+                menu.notifyEmptyOption();
+            }
+
+        } while(!notEmpty);
+
+    }
+
+    private void showCityData(City city) {
+        List<DestinationCity> successors = graph.getSuccessors(city);
+        Menu menu = new Menu();
+        menu.showCityInformation(city, successors);
+    }
+
+    @Override
+    public void cityResult(City city, int errorCode) {
+        switch(errorCode) {
+            case GoogleManager.OK:
+                List<City> cities = graph.getCities();
+                googleManager.getCloserDestinies(city, cities, this);
+                break;
+            case GoogleManager.KO:
+                Menu menu = new Menu();
+                menu.notifyCityNotFound();
+                break;
+        }
+    }
+
+    @Override
+    public void connectionsResult(City from, List<Connection> connections, int errorCode) {
+        Menu menu = new Menu();
+        switch(errorCode) {
+            case GoogleManager.OK:
+                graph.addCity(from);
+                List<Connection> closerConnections = getCloserConnections(connections, MAX_CONNECTIONS);
+                for(int i = 0; i < closerConnections.size(); i++) {
+                    Connection connection = closerConnections.get(i);
+                    Connection returnConnection = new Connection(connection.getTo(), from.getName(),
+                            connection.getDistance(), connection.getDuration());
+                    graph.addConnection(connection);
+                    graph.addConnection(returnConnection);
+                }
+                menu.notifyCityAdded();
+                showCityData(from);
+                break;
+            case GoogleManager.KO:
+                menu.notifyConnectionsError();
+                break;
+        }
+    }
+
+    private List<Connection> getCloserConnections(List<Connection> connections, int maxConnections) {
+        if(connections.size() <= maxConnections) {
+            return connections;
+        } else {
+            connections.sort(Comparator.comparingInt(Connection::getDistance));
+            return connections.subList(0, maxConnections - 1);
+        }
     }
 
 }

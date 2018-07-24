@@ -11,13 +11,11 @@ public class SalleMaps {
             menu.showMainMenu();
 
             if(menu.isOptionEmpty()) {
-                System.out.println();
-                System.out.println("No option was introduced!");
+                menu.notifyEmptyOption();
             }
 
             if(!menu.isOptionInt()) {
-                System.out.println();
-                System.out.println("Introduced option is not a number!");
+                menu.notifyNoIntOption();
             } else {
                 exit = optionManager.optionChosen(menu.getOptionInt());
             }

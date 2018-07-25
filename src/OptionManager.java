@@ -3,8 +3,8 @@ import Model.Connection;
 import model.DestinationCity;
 import model.GoogleManager;
 import model.JsonManager;
+import model.Route;
 import model.graph.Graph;
-import model.list.CustomList;
 import org.json.JSONException;
 
 import java.io.BufferedReader;
@@ -18,11 +18,15 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
     //Raw path
     private final static String RAW_DIR = "raw" + System.getProperty("file.separator");
 
-    //Possible options
+    //Possible main menu options
     private final static int IMPORT = 1;
     private final static int SEARCH = 2;
     private final static int ROUTE = 3;
     private final static int EXIT = 4;
+
+    //Possible route menu options
+    private final static int SHORTEST = 1;
+    private final static int FASTEST = 2;
 
     //Max connections
     private final static int MAX_CONNECTIONS = 20;
@@ -50,7 +54,7 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
                 return false;
             case ROUTE:
                 if(graph != null) {
-                    System.out.println("In progress...");
+                    routingProcess();
                 } else {
                     menu.notifyUnavailableOption();
                 }
@@ -203,6 +207,83 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
             connections.sort(Comparator.comparingInt(Connection::getDistance));
             return connections.subList(0, maxConnections - 1);
         }
+    }
+
+    private void routingProcess() {
+
+        Menu menu = new Menu();
+        boolean exit = false;
+
+        do {
+
+            menu.askForOrigin();
+
+            if(!menu.isOptionEmpty()) {
+                String from = menu.getOptionString();
+                if(graph.containsCity(from)) {
+                    City fromCity = graph.getCityData(from);
+                    do {
+                        menu.askForDestiny();
+                        if(menu.isOptionEmpty()) {
+                            menu.notifyEmptyOption();
+                        } else {
+                            String to = menu.getOptionString();
+                            if(graph.containsCity(to)) {
+                                calculateRoute(fromCity, graph.getCityData(to));
+                            } else {
+                                menu.notifyCityNotFound();
+                            }
+                            exit = true;
+                        }
+                    } while(menu.isOptionEmpty());
+                } else {
+                    menu.notifyCityNotFound();
+                    exit = true;
+                }
+            } else {
+                menu.notifyEmptyOption();
+            }
+
+        } while(!exit);
+
+    }
+
+    private void calculateRoute(City from, City to) {
+
+        Menu menu = new Menu();
+        boolean exit = false;
+
+        do {
+            menu.showRouteMenu();
+            if(menu.isOptionEmpty()) {
+                menu.notifyEmptyOption();
+            } else if(!menu.isOptionInt()) {
+                menu.notifyNoIntOption();
+            } else {
+
+                int option = menu.getOptionInt();
+                Route route = null;
+
+                switch(option) {
+                    case SHORTEST:
+                        route = graph.getShortestRoute(from, to);
+                        break;
+                    case FASTEST:
+                        route = graph.getFastestRoute(from, to);
+                        break;
+                    default:
+                        menu.notifyInvalidIntRange();
+                        break;
+                }
+
+                if(route != null) {
+                    menu.showRoute(from, to, route);
+                    exit = true;
+                }
+
+            }
+        } while(!exit);
+
     }
 
 }

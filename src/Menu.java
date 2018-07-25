@@ -1,5 +1,6 @@
 import Model.City;
 import model.DestinationCity;
+import model.Route;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -77,6 +78,57 @@ public class Menu {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalTime time = LocalTime.of(hours, minutes, seconds);
         return time.format(formatter);
+    }
+
+    public void askForOrigin() {
+        //Get city name
+        System.out.println();
+        Scanner sc = new Scanner(System.in).useDelimiter(System.lineSeparator());
+        System.out.print("From: ");
+        option = sc.nextLine();
+    }
+
+    public void askForDestiny() {
+        //Get city name
+        System.out.println();
+        Scanner sc = new Scanner(System.in).useDelimiter(System.lineSeparator());
+        System.out.print("To: ");
+        option = sc.nextLine();
+    }
+
+    public void showRouteMenu() {
+
+        //Show options
+        System.out.println();
+        System.out.println("1. Shortest route");
+        System.out.println("2. Fastest route");
+        System.out.println();
+
+        //Get option
+        Scanner sc = new Scanner(System.in).useDelimiter(System.lineSeparator());
+        System.out.print("Option: ");
+        option = sc.nextLine();
+
+    }
+
+    public void showRoute(City from, City to, Route route) {
+
+        System.out.println();
+        System.out.println(String.format("Route from %s to %s", from.getName(), to.getName()));
+        System.out.println(String.format(Locale.US, "Travel distance: %.3f km",
+                (double) route.getDistance() / 1000));
+        System.out.println(String.format("Travel duration: %s", timeFromSeconds(route.getDuration())));
+
+        //Show cities
+        List<City> cities = route.getCities();
+        for(int i = 0; i < cities.size(); i++) {
+            System.out.print(cities.get(i).getName());
+            if(i < cities.size() - 1) {
+                System.out.print(" -> ");
+            }
+        }
+        System.out.println();
+
     }
 
     public void notifyEmptyOption() {

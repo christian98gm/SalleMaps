@@ -7,19 +7,14 @@ public class SalleMaps {
         boolean exit = false;
 
         do {
-
             menu.showMainMenu();
-
             if(menu.isOptionEmpty()) {
                 menu.notifyEmptyOption();
-            }
-
-            if(!menu.isOptionInt()) {
+            } else if(!menu.isOptionInt()) {
                 menu.notifyNoIntOption();
             } else {
                 exit = optionManager.optionChosen(menu.getOptionInt());
             }
-
         } while(!exit);
 
     }

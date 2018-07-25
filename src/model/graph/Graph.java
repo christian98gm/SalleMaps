@@ -3,7 +3,9 @@ package model.graph;
 import Model.City;
 import Model.Connection;
 import model.DestinationCity;
+import model.Route;
 import model.list.CustomList;
+import model.list.CustomNode;
 
 import java.util.List;
 
@@ -216,6 +218,168 @@ public class Graph {
         }
 
         return cities;
+
+    }
+
+    public Route getShortestRoute(City from, City to) {
+        return getRoute(from, to, true);
+    }
+
+    public Route getFastestRoute(City from, City to) {
+        return getRoute(from, to, false);
+    }
+
+    private Route getRoute(City from, City to, boolean shortest) {
+
+        //Null cities
+        if(from == null || to == null) {
+            throw new NullPointerException();
+        }
+
+        //Not existent cities
+        if(!containsCity(from.getName()) || !containsCity(to.getName())) {
+            return null;
+        }
+
+        //Dijkstra
+        //Init values
+        Cost costs[] = new Cost[size];
+        int closerNode[] = new int[size];
+        List<Integer> vertices = new CustomList();
+        int fromIndex = indexOf(from.getName());
+
+        for(int i = 0; i < size; i++) {
+
+            if(i != fromIndex) {
+                vertices.add(i);
+                costs[i] = getCost(adjacencyList[fromIndex], adjacencyList[i].getCity(), shortest);
+            } else {
+                Cost cost = new Cost();
+                cost.setCost(0);
+                cost.setDistance(0);
+                cost.setDuration(0);
+                costs[i] = cost;
+            }
+
+            if(costs[i].getCost() == -1) {
+                closerNode[i] = -1;
+            } else {
+                closerNode[i] = fromIndex;
+            }
+
+        }
+
+        //Calculate distances
+        for(int i = 0; i < size - 1; i++) {
+
+            Cost minCost = new Cost();
+            minCost.setUndefined();
+            int minIndex = -1;
+            int currentVertex = -1;
+
+            //Find current min cost
+            for(int j = 0; j < vertices.size(); j++) {
+                //Update min cost
+                int k = vertices.get(j);
+                if(minCost.getCost() == -1 || minCost.getCost() > costs[k].getCost() && costs[k].getCost() != -1) {
+                    minCost = costs[k];
+                    minIndex = k;
+                    currentVertex = j;
+                }
+            }
+
+            //Remove vertex
+            vertices.remove(currentVertex);
+
+            if(minCost.getCost() != -1) {
+                for(int j = 0; j < vertices.size(); j++) {
+
+                    int k = vertices.get(j);
+                    Cost newCost = getCost(adjacencyList[minIndex], adjacencyList[k].getCity(), shortest);
+
+                    if(costs[k].getCost() == -1 && newCost.getCost() != -1) {
+                        costs[k] = newCost;
+                        closerNode[k] = minIndex;
+                    } else if(costs[k].getCost() != -1 && newCost.getCost() != -1 &&
+                            minCost.getCost() + newCost.getCost() < costs[k].getCost()) {
+                        costs[k] = new Cost(minCost, newCost);
+                        closerNode[k] = minIndex;
+                    }
+
+                }
+            } else {
+                break;
+            }
+
+        }
+
+        //Calculate route
+        List<Integer> routeTracer = new CustomList();
+        int toIndex = indexOf(to.getName());
+        routeTracer.add(toIndex);
+
+        int currentIndex = toIndex;
+        while(currentIndex != fromIndex) {
+            currentIndex = closerNode[currentIndex];
+            routeTracer.add(currentIndex);
+        }
+
+        //Get route
+        Route route = new Route();
+        List<City> cities = new CustomList();
+        for(int i = routeTracer.size() - 1; i >= 0; i--) {
+            cities.add(adjacencyList[routeTracer.get(i)].getCity());
+        }
+        route.setCities(cities);
+        route.setDistance(costs[toIndex].getDistance());
+        route.setDuration(costs[toIndex].getDuration());
+
+        return route;
+
+    }
+
+    private Cost getCost(AdjacencyVertex from, City to, boolean shortest) {
+
+        int cost = -1;
+        int distance = -1;
+        int duration = -1;
+
+        if(from.getSuccessor() != null) {
+            AdjacencyNode currentNode = from.getSuccessor();
+            while(currentNode != null) {
+                Connection connection = currentNode.getConnection();
+                if(connection.getTo().equals(to.getName())) {
+                    if(shortest) {
+                        cost = connection.getDistance();
+                    } else {
+                        cost = connection.getDuration();
+                    }
+                    distance = connection.getDistance();
+                    duration = connection.getDuration();
+                    break;
+                }
+                currentNode = currentNode.getSuccessor();
+            }
+        }
+
+        Cost totalCost = new Cost();
+        totalCost.setCost(cost);
+        totalCost.setDistance(distance);
+        totalCost.setDuration(duration);
+
+        return totalCost;
+
+    }
+
+    private int indexOf(String cityName) {
+
+        for(int i = 0; i < size; i++) {
+            if(adjacencyList[i].getCity().getName().equals(cityName)) {
+                return i;
+            }
+        }
+
+        return -1;
 
     }
 

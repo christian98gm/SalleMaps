@@ -116,7 +116,7 @@ public class Menu {
         System.out.println();
         System.out.println(String.format("Route from %s to %s", from.getName(), to.getName()));
         System.out.println(String.format(Locale.US, "Travel distance: %.3f km",
-                (double) route.getDistance() / 1000));
+                    (double) route.getDistance() / 1000));
         System.out.println(String.format("Travel duration: %s", timeFromSeconds(route.getDuration())));
 
         //Show cities
@@ -169,6 +169,11 @@ public class Menu {
     public void notifyCityAdded() {
         System.out.println();
         System.out.println("NEW CITY ADDED");
+    }
+
+    public void notifyUnreachableCity(City from, City to) {
+        System.out.println();
+        System.out.println(String.format("Can't reach %s from %s", from.getName(), to.getName()));
     }
 
     public boolean isOptionEmpty() {

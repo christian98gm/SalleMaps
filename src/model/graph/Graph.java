@@ -5,7 +5,6 @@ import Model.Connection;
 import model.DestinationCity;
 import model.Route;
 import model.list.CustomList;
-import model.list.CustomNode;
 
 import java.util.List;
 
@@ -298,7 +297,7 @@ public class Graph {
                     Cost newCost = getCost(adjacencyList[minIndex], adjacencyList[k].getCity(), shortest);
 
                     if(costs[k].getCost() == -1 && newCost.getCost() != -1) {
-                        costs[k] = newCost;
+                        costs[k] = new Cost(minCost, newCost);
                         closerNode[k] = minIndex;
                     } else if(costs[k].getCost() != -1 && newCost.getCost() != -1 &&
                             minCost.getCost() + newCost.getCost() < costs[k].getCost()) {
@@ -313,9 +312,14 @@ public class Graph {
 
         }
 
+        //Check if it's a reachable destiny
+        int toIndex = indexOf(to.getName());
+        if(costs[toIndex].getCost() == -1) {
+            return null;
+        }
+
         //Calculate route
         List<Integer> routeTracer = new CustomList();
-        int toIndex = indexOf(to.getName());
         routeTracer.add(toIndex);
 
         int currentIndex = toIndex;

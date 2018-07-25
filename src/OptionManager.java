@@ -267,9 +267,17 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
                 switch(option) {
                     case SHORTEST:
                         route = graph.getShortestRoute(from, to);
+                        if(route == null) {
+                            menu.notifyUnreachableCity(from, to);
+                            exit = true;
+                        }
                         break;
                     case FASTEST:
                         route = graph.getFastestRoute(from, to);
+                        if(route == null) {
+                            menu.notifyUnreachableCity(from, to);
+                            exit = true;
+                        }
                         break;
                     default:
                         menu.notifyInvalidIntRange();

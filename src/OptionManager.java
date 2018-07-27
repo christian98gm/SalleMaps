@@ -37,8 +37,12 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
     private Graph graph;
     private GoogleManager googleManager;
 
-    private boolean error;
+    //Search aux params
     private List<Connection> connections;
+    private boolean error;
+
+    //Time
+    private long initTime;
 
     public OptionManager() {
         googleManager = GoogleManager.getInstance();
@@ -147,15 +151,36 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
             if(!menu.isOptionEmpty()) {
 
                 notEmpty = true;
+                String cityName = menu.getOptionString();
+                boolean exit = false;
 
-                //Check if requested city exists
-                if(!graph.containsCity(menu.getOptionString())) {
-                    error = false;
-                    connections.clear();
-                    googleManager.getNewCity(menu.getOptionString(), this);
-                } else {
-                    showCityData(graph.getCityData(menu.getOptionString()));
-                }
+                do {
+
+                    menu.showOptimizationMenu();
+                    if(menu.isOptionEmpty()) {
+                        menu.notifyEmptyOption();
+                    } else if(!menu.isOptionInt()) {
+                        menu.notifyNoIntOption();
+                    } else {
+                        int option = menu.getOptionInt();
+                        if(option != Graph.NO_OPTIMIZATION && option != Graph.AVL_OPTIMIZATION &&
+                                option != Graph.HASH_OPTIMIZATION) {
+                            menu.notifyInvalidIntRange();
+                        } else {
+                            graph.setMode(option);
+                            if(!graph.containsCity(cityName)) {
+                                initTime = System.currentTimeMillis();
+                                error = false;
+                                connections.clear();
+                                googleManager.getNewCity(cityName, this);
+                            } else {
+                                showCityData(graph.getCityData(cityName));
+                            }
+                            exit = true;
+                        }
+                    }
+
+                } while(!exit);
 
             } else {
                 menu.notifyEmptyOption();
@@ -225,6 +250,7 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
                 showCityData(from);
             }
 
+            menu.notifyOperationTime(System.currentTimeMillis() - initTime);
             error = false;
             connections.clear();
 
@@ -247,9 +273,26 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
         boolean exit = false;
 
         do {
+            menu.showOptimizationMenu();
+            if(menu.isOptionEmpty()) {
+                menu.notifyEmptyOption();
+            } else if(!menu.isOptionInt()) {
+                menu.notifyNoIntOption();
+            } else {
+                int option = menu.getOptionInt();
+                if(option != Graph.NO_OPTIMIZATION && option != Graph.AVL_OPTIMIZATION &&
+                        option != Graph.HASH_OPTIMIZATION) {
+                    menu.notifyInvalidIntRange();
+                } else {
+                    graph.setMode(option);
+                    exit = true;
+                }
+            }
+        } while(!exit);
 
+        exit = false;
+        do {
             menu.askForOrigin();
-
             if(!menu.isOptionEmpty()) {
                 String from = menu.getOptionString();
                 if(graph.containsCity(from)) {
@@ -275,7 +318,6 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
             } else {
                 menu.notifyEmptyOption();
             }
-
         } while(!exit);
 
     }
@@ -295,6 +337,7 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
 
                 int option = menu.getOptionInt();
                 Route route = null;
+                initTime = System.currentTimeMillis();
 
                 switch(option) {
                     case SHORTEST:
@@ -315,6 +358,8 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
                         menu.notifyInvalidIntRange();
                         break;
                 }
+
+                menu.notifyOperationTime(System.currentTimeMillis() - initTime);
 
                 if(route != null) {
                     menu.showRoute(from, to, route);

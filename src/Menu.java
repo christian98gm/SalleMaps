@@ -131,6 +131,21 @@ public class Menu {
 
     }
 
+    public void showOptimizationMenu() {
+
+        //Show options
+        System.out.println();
+        System.out.println("1. No optimization");
+        System.out.println("2. Tree optimization");
+        System.out.println("3. Hash table optimization");
+
+        //Get option
+        Scanner sc = new Scanner(System.in).useDelimiter(System.lineSeparator());
+        System.out.print("Option: ");
+        option = sc.nextLine();
+
+    }
+
     public void notifyEmptyOption() {
         System.out.println();
         System.out.println("No option was introduced!");
@@ -163,7 +178,7 @@ public class Menu {
 
     public void notifyConnectionsError() {
         System.out.println();
-        System.out.println("Error! Could not load connections!");
+        System.out.println("Error! Could not load some connections!");
     }
 
     public void notifyCityAdded() {
@@ -174,6 +189,11 @@ public class Menu {
     public void notifyUnreachableCity(City from, City to) {
         System.out.println();
         System.out.println(String.format("Can't reach %s from %s", from.getName(), to.getName()));
+    }
+
+    public void notifyOperationTime(long millis) {
+        System.out.println();
+        System.out.println(String.format("This operation last %d ms", millis));
     }
 
     public boolean isOptionEmpty() {

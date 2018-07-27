@@ -1,0 +1,417 @@
+{
+  "cities": [
+    {
+      "name": "O Chao do Monte",
+      "address": "27185 O Chao do Monte, Lugo, Spain",
+      "country": "ES",
+      "latitude": 42.8795242,
+      "longitude": -7.602780999999998
+    },
+    {
+      "name": "Lousada",
+      "address": "27834 Lousada, Lugo, Spain",
+      "country": "ES",
+      "latitude": 43.4223181,
+      "longitude": -7.712987999999999
+    },
+    {
+      "name": "Ribadeo",
+      "address": "Ribadeo, Lugo, Spain",
+      "country": "ES",
+      "latitude": 43.5122469,
+      "longitude": -7.1144039
+    },
+    {
+      "name": "Portomarín",
+      "address": "27170 Portomarín, Lugo, Spain",
+      "country": "ES",
+      "latitude": 42.8074277,
+      "longitude": -7.615830099999999
+    },
+    {
+      "name": "Lugo",
+      "address": "Lugo, Spain",
+      "country": "ES",
+      "latitude": 43.0097384,
+      "longitude": -7.5567582
+    },
+    {
+      "name": "Oleiros",
+      "address": "Oleiros, A Coruña, Spain",
+      "country": "ES",
+      "latitude": 43.33270590000001,
+      "longitude": -8.3157003
+    },
+    {
+      "name": "A Coruña",
+      "address": "A Coruña, Spain",
+      "country": "ES",
+      "latitude": 43.3623436,
+      "longitude": -8.4115401
+    },
+    {
+      "name": "Santiago de Compostela",
+      "address": "Santiago de Compostela, A Coruña, Spain",
+      "country": "ES",
+      "latitude": 42.8782132,
+      "longitude": -8.5448445
+    },
+    {
+      "name": "Fisterra",
+      "address": "Fisterra, A Coruña, Spain",
+      "country": "ES",
+      "latitude": 42.9078005,
+      "longitude": -9.2650315
+    },
+    {
+      "name": "Vigo",
+      "address": "Vigo, Pontevedra, Spain",
+      "country": "ES",
+      "latitude": 42.24059889999999,
+      "longitude": -8.7207268
+    },
+    {
+      "name": "A Guarda",
+      "address": "A Guarda, Pontevedra, Spain",
+      "country": "ES",
+      "latitude": 41.9074756,
+      "longitude": -8.865254
+    },
+    {
+      "name": "Tui",
+      "address": "Tui, Pontevedra, Spain",
+      "country": "ES",
+      "latitude": 42.049155,
+      "longitude": -8.6466099
+    },
+    {
+      "name": "Mougán",
+      "address": "27185 Mougán, Lugo, Spain",
+      "country": "ES",
+      "latitude": 42.867732,
+      "longitude": -7.600239800000001
+    },
+    {
+      "name": "Sarria",
+      "address": "Sarria, Lugo, Spain",
+      "country": "ES",
+      "latitude": 42.7600365,
+      "longitude": -7.4165053
+    },
+    {
+      "name": "Pontevedra",
+      "address": "Pontevedra, Spain",
+      "country": "ES",
+      "latitude": 42.4298846,
+      "longitude": -8.6446202
+    }
+  ],
+  "connections": [
+    {
+      "from": "Pontevedra",
+      "to": "Santiago de Compostela",
+      "distance": 69962,
+      "duration": 3609
+    },
+    {
+      "from": "Pontevedra",
+      "to": "Vigo",
+      "distance": 28789,
+      "duration": 1668
+    },
+    {
+      "from": "A Guarda",
+      "to": "Tui",
+      "distance": 27669,
+      "duration": 1727
+    },
+    {
+      "from": "A Guarda",
+      "to": "Vigo",
+      "distance": 61949,
+      "duration": 3075
+    },
+    {
+      "from": "Tui",
+      "to": "A Guarda",
+      "distance": 27592,
+      "duration": 1711
+    },
+    {
+      "from": "Tui",
+      "to": "Vigo",
+      "distance": 35378,
+      "duration": 1615
+    },
+    {
+      "from": "Tui",
+      "to": "Pontevedra",
+      "distance": 52080,
+      "duration": 2435
+    },
+    {
+      "from": "Pontevedra",
+      "to": "Santiago de Compostela",
+      "distance": 69962,
+      "duration": 3609
+    },
+    {
+      "from": "Pontevedra",
+      "to": "Fisterra",
+      "distance": 134282,
+      "duration": 6242
+    },
+    {
+      "from": "Fisterra",
+      "to": "Pontevedra",
+      "distance": 134017,
+      "duration": 6174
+    },
+    {
+      "from": "Fisterra",
+      "to": "Santiago de Compostela",
+      "distance": 83826,
+      "duration": 5057
+    },
+    {
+      "from": "Santiago de Compostela",
+      "to": "A Coruña",
+      "distance": 75312,
+      "duration": 3248
+    },
+    {
+      "from": "A Coruña",
+      "to": "Santiago de Compostela",
+      "distance": 73616,
+      "duration": 3500
+    },
+    {
+      "from": "Santiago de Compostela",
+      "to": "Lugo",
+      "distance": 104196,
+      "duration": 5581
+    },
+    {
+      "from": "Lugo",
+      "to": "Santiago de Compostela",
+      "distance": 114904,
+      "duration": 5719
+    },
+    {
+      "from": "Lugo",
+      "to": "Lousada",
+      "distance": 63443,
+      "duration": 2993
+    },
+    {
+      "from": "Lugo",
+      "to": "Sarria",
+      "distance": 36187,
+      "duration": 2041
+    },
+    {
+      "from": "Portomarín",
+      "to": "Lousada",
+      "distance": 93002,
+      "duration": 3920
+    },
+    {
+      "from": "Portomarín",
+      "to": "Mougán",
+      "distance": 8624,
+      "duration": 530
+    },
+    {
+      "from": "Portomarín",
+      "to": "O Chao do Monte",
+      "distance": 10011,
+      "duration": 624
+    },
+    {
+      "from": "Lousada",
+      "to": "O Chao do Monte",
+      "distance": 83937,
+      "duration": 3505
+    },
+    {
+      "from": "O Chao do Monte",
+      "to": "Lousada",
+      "distance": 83687,
+      "duration": 3493
+    },
+    {
+      "from": "O Chao do Monte",
+      "to": "Portomarín",
+      "distance": 10020,
+      "duration": 605
+    },
+    {
+      "from": "Ribadeo",
+      "to": "Portomarín",
+      "distance": 116056,
+      "duration": 5897
+    },
+    {
+      "from": "Portomarín",
+      "to": "Ribadeo",
+      "distance": 116969,
+      "duration": 5929
+    },
+    {
+      "from": "Lugo",
+      "to": "Ribadeo",
+      "distance": 86256,
+      "duration": 4900
+    },
+    {
+      "from": "Ribadeo",
+      "to": "Lugo",
+      "distance": 87140,
+      "duration": 5067
+    },
+    {
+      "from": "Oleiros",
+      "to": "A Coruña",
+      "distance": 12810,
+      "duration": 1099
+    },
+    {
+      "from": "A Coruña",
+      "to": "Oleiros",
+      "distance": 12523,
+      "duration": 1073
+    },
+    {
+      "from": "Mougán",
+      "to": "Sarria",
+      "distance": 33094,
+      "duration": 1741
+    },
+    {
+      "from": "Mougán",
+      "to": "Portomarín",
+      "distance": 8633,
+      "duration": 595
+    },
+    {
+      "from": "Mougán",
+      "to": "Lugo",
+      "distance": 18017,
+      "duration": 1147
+    },
+    {
+      "from": "Mougán",
+      "to": "Lousada",
+      "distance": 84801,
+      "duration": 3496
+    },
+    {
+      "from": "Sarria",
+      "to": "Lugo",
+      "distance": 37272,
+      "duration": 1930
+    },
+    {
+      "from": "Santiago de Compostela",
+      "to": "Lugo",
+      "distance": 104196,
+      "duration": 5581
+    },
+    {
+      "from": "Santiago de Compostela",
+      "to": "Oleiros",
+      "distance": 65886,
+      "duration": 2892
+    },
+    {
+      "from": "Santiago de Compostela",
+      "to": "Vigo",
+      "distance": 88301,
+      "duration": 3766
+    },
+    {
+      "from": "Santiago de Compostela",
+      "to": "Sarria",
+      "distance": 167395,
+      "duration": 6340
+    },
+    {
+      "from": "Santiago de Compostela",
+      "to": "A Coruña",
+      "distance": 75312,
+      "duration": 3248
+    },
+    {
+      "from": "Lousada",
+      "to": "O Chao do Monte",
+      "distance": 83937,
+      "duration": 3505
+    },
+    {
+      "from": "Lousada",
+      "to": "Portomarín",
+      "distance": 93262,
+      "duration": 3999
+    },
+    {
+      "from": "Lousada",
+      "to": "Lugo",
+      "distance": 63605,
+      "duration": 3051
+    },
+    {
+      "from": "Lousada",
+      "to": "Mougán",
+      "distance": 85051,
+      "duration": 3594
+    },
+    {
+      "from": "Lousada",
+      "to": "Ribadeo",
+      "distance": 91149,
+      "duration": 3963
+    },
+    {
+      "from": "Lousada",
+      "to": "Sarria",
+      "distance": 96124,
+      "duration": 4084
+    },
+    {
+      "from": "Oleiros",
+      "to": "Santiago de Compostela",
+      "distance": 65634,
+      "duration": 3267
+    },
+    {
+      "from": "Fisterra",
+      "to": "Santiago de Compostela",
+      "distance": 83826,
+      "duration": 5057
+    },
+    {
+      "from": "Vigo",
+      "to": "Santiago de Compostela",
+      "distance": 95196,
+      "duration": 4425
+    },
+    {
+      "from": "Vigo",
+      "to": "A Guarda",
+      "distance": 61251,
+      "duration": 3041
+    },
+    {
+      "from": "Vigo",
+      "to": "Tui",
+      "distance": 35369,
+      "duration": 1678
+    },
+    {
+      "from": "Vigo",
+      "to": "Pontevedra",
+      "distance": 27869,
+      "duration": 1669
+    }
+  ]
+}

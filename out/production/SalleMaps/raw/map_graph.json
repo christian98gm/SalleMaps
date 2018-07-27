@@ -1,0 +1,856 @@
+{
+  "cities": [
+    {
+      "name": "Cambrils",
+      "address": "Cambrils, Tarragona, Spain",
+      "country": "ES",
+      "latitude": 41.0666754,
+      "longitude": 1.0603606
+    },
+    {
+      "name": "Reus",
+      "address": "Reus, Tarragona, Spain",
+      "country": "ES",
+      "latitude": 41.1498259,
+      "longitude": 1.1055321
+    },
+    {
+      "name": "Tarragona",
+      "address": "Tarragona, Spain",
+      "country": "ES",
+      "latitude": 41.1188827,
+      "longitude": 1.2444909
+    },
+    {
+      "name": "Torredembarra",
+      "address": "Torredembarra, Tarragona, Spain",
+      "country": "ES",
+      "latitude": 41.14409670000001,
+      "longitude": 1.4009454
+    },
+    {
+      "name": "Coma-ruga",
+      "address": "Coma-ruga, Tarragona, Spain",
+      "country": "ES",
+      "latitude": 41.182712,
+      "longitude": 1.5259399
+    },
+    {
+      "name": "Calafell",
+      "address": "Calafell, Tarragona, Spain",
+      "country": "ES",
+      "latitude": 41.1938386,
+      "longitude": 1.5664556
+    },
+    {
+      "name": "El Vendrell",
+      "address": "El Vendrell, Tarragona, Spain",
+      "country": "ES",
+      "latitude": 41.2196699,
+      "longitude": 1.534307
+    },
+    {
+      "name": "Valls",
+      "address": "43800 Valls, Tarragona, Spain",
+      "country": "ES",
+      "latitude": 41.2854449,
+      "longitude": 1.2494589
+    },
+    {
+      "name": "Montblanc",
+      "address": "Montblanc, Tarragona, Spain",
+      "country": "ES",
+      "latitude": 41.3744399,
+      "longitude": 1.1615674
+    },
+    {
+      "name": "El Pla de Santa Maria",
+      "address": "El Pla de Santa Maria, 43810, Tarragona, Spain",
+      "country": "ES",
+      "latitude": 41.3435678,
+      "longitude": 1.3180042
+    },
+    {
+      "name": "Lleida",
+      "address": "Lleida, Spain",
+      "country": "ES",
+      "latitude": 41.6175899,
+      "longitude": 0.6200146
+    },
+    {
+      "name": "Tàrrega",
+      "address": "25300 Tàrrega, Lleida, Spain",
+      "country": "ES",
+      "latitude": 41.6480797,
+      "longitude": 1.1409432
+    },
+    {
+      "name": "Igualada",
+      "address": "Igualada, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.5849177,
+      "longitude": 1.612949
+    },
+    {
+      "name": "Martorell",
+      "address": "Martorell, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.4803984,
+      "longitude": 1.9148091
+    },
+    {
+      "name": "Vilafranca del Penedès",
+      "address": "08720 Vilafranca del Penedès, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.3461265,
+      "longitude": 1.6979398
+    },
+    {
+      "name": "Sant Andreu de la Barca",
+      "address": "Sant Andreu de la Barca, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.4470397,
+      "longitude": 1.9728289
+    },
+    {
+      "name": "Molins de Rei",
+      "address": "Molins de Rei, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.4183618,
+      "longitude": 2.0322172
+    },
+    {
+      "name": "Vilanova i la Geltrú",
+      "address": "Vilanova i la Geltrú, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.2151504,
+      "longitude": 1.727446
+    },
+    {
+      "name": "Sitges",
+      "address": "08870 Sitges, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.2371851,
+      "longitude": 1.805886
+    },
+    {
+      "name": "Castelldefels",
+      "address": "Castelldefels, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.2800161,
+      "longitude": 1.9766294
+    },
+    {
+      "name": "Barcelona",
+      "address": "Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.3850639,
+      "longitude": 2.1734035
+    },
+    {
+      "name": "Mataró",
+      "address": "Mataró, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.5381124,
+      "longitude": 2.4447406
+    },
+    {
+      "name": "Rubí",
+      "address": "08191 Rubí, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.4971174,
+      "longitude": 2.0349243
+    },
+    {
+      "name": "Sabadell",
+      "address": "Sabadell, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.5462745,
+      "longitude": 2.1086131
+    },
+    {
+      "name": "Terrassa",
+      "address": "Terrassa, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.563211,
+      "longitude": 2.0088747
+    },
+    {
+      "name": "Manresa",
+      "address": "Manresa, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.7163888,
+      "longitude": 1.8220818
+    },
+    {
+      "name": "Vic",
+      "address": "08500 Vic, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.9304373,
+      "longitude": 2.2544335
+    },
+    {
+      "name": "Granollers",
+      "address": "Granollers, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.60619270000001,
+      "longitude": 2.2870889
+    },
+    {
+      "name": "Ripoll",
+      "address": "17500 Ripoll, Girona, Spain",
+      "country": "ES",
+      "latitude": 42.1994589,
+      "longitude": 2.1907618
+    },
+    {
+      "name": "Berga",
+      "address": "08600 Berga, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 42.1012595,
+      "longitude": 1.8439221
+    },
+    {
+      "name": "Solsona",
+      "address": "Solsona, Lleida, Spain",
+      "country": "ES",
+      "latitude": 41.9939512,
+      "longitude": 1.5160212
+    },
+    {
+      "name": "Cardona",
+      "address": "08261 Cardona, Barcelona, Spain",
+      "country": "ES",
+      "latitude": 41.913607,
+      "longitude": 1.6797134
+    },
+    {
+      "name": "Artesa de Segre",
+      "address": "25730 Artesa de Segre, Lleida, Spain",
+      "country": "ES",
+      "latitude": 41.8956604,
+      "longitude": 1.0472421
+    },
+    {
+      "name": "Balaguer",
+      "address": "Balaguer, Lleida, Spain",
+      "country": "ES",
+      "latitude": 41.7877143,
+      "longitude": 0.8008388
+    }
+  ],
+  "connections": [
+    {
+      "from": "Cambrils",
+      "to": "Reus",
+      "distance": 12260,
+      "duration": 1140
+    },
+    {
+      "from": "Cambrils",
+      "to": "Tarragona",
+      "distance": 20940,
+      "duration": 1326
+    },
+    {
+      "from": "Reus",
+      "to": "Cambrils",
+      "distance": 12375,
+      "duration": 1207
+    },
+    {
+      "from": "Reus",
+      "to": "Tarragona",
+      "distance": 15387,
+      "duration": 1009
+    },
+    {
+      "from": "Reus",
+      "to": "Valls",
+      "distance": 21808,
+      "duration": 1450
+    },
+    {
+      "from": "Tarragona",
+      "to": "Cambrils",
+      "distance": 21417,
+      "duration": 1481
+    },
+    {
+      "from": "Tarragona",
+      "to": "Reus",
+      "distance": 15322,
+      "duration": 1029
+    },
+    {
+      "from": "Tarragona",
+      "to": "Torredembarra",
+      "distance": 16563,
+      "duration": 1172
+    },
+    {
+      "from": "Tarragona",
+      "to": "El Vendrell",
+      "distance": 35073,
+      "duration": 1717
+    },
+    {
+      "from": "Tarragona",
+      "to": "Valls",
+      "distance": 21911,
+      "duration": 1162
+    },
+    {
+      "from": "Torredembarra",
+      "to": "Tarragona",
+      "distance": 17515,
+      "duration": 1182
+    },
+    {
+      "from": "Torredembarra",
+      "to": "Coma-ruga",
+      "distance": 13049,
+      "duration": 1142
+    },
+    {
+      "from": "Coma-ruga",
+      "to": "Torredembarra",
+      "distance": 13772,
+      "duration": 1219
+    },
+    {
+      "from": "Coma-ruga",
+      "to": "Calafell",
+      "distance": 5543,
+      "duration": 710
+    },
+    {
+      "from": "Calafell",
+      "to": "Coma-ruga",
+      "distance": 4913,
+      "duration": 629
+    },
+    {
+      "from": "Calafell",
+      "to": "El Vendrell",
+      "distance": 6395,
+      "duration": 764
+    },
+    {
+      "from": "Calafell",
+      "to": "Vilanova i la Geltrú",
+      "distance": 18033,
+      "duration": 1330
+    },
+    {
+      "from": "El Vendrell",
+      "to": "Tarragona",
+      "distance": 35271,
+      "duration": 1780
+    },
+    {
+      "from": "El Vendrell",
+      "to": "Calafell",
+      "distance": 5641,
+      "duration": 687
+    },
+    {
+      "from": "El Vendrell",
+      "to": "Valls",
+      "distance": 32813,
+      "duration": 2103
+    },
+    {
+      "from": "El Vendrell",
+      "to": "El Pla de Santa Maria",
+      "distance": 30556,
+      "duration": 2072
+    },
+    {
+      "from": "El Vendrell",
+      "to": "Vilafranca del Penedès",
+      "distance": 21792,
+      "duration": 1691
+    },
+    {
+      "from": "Valls",
+      "to": "Reus",
+      "distance": 25594,
+      "duration": 1570
+    },
+    {
+      "from": "Valls",
+      "to": "Tarragona",
+      "distance": 20185,
+      "duration": 1312
+    },
+    {
+      "from": "Valls",
+      "to": "El Vendrell",
+      "distance": 30275,
+      "duration": 1903
+    },
+    {
+      "from": "Valls",
+      "to": "Montblanc",
+      "distance": 16809,
+      "duration": 1170
+    },
+    {
+      "from": "Valls",
+      "to": "El Pla de Santa Maria",
+      "distance": 11802,
+      "duration": 1204
+    },
+    {
+      "from": "Montblanc",
+      "to": "Montblanc",
+      "distance": 0,
+      "duration": 0
+    },
+    {
+      "from": "Montblanc",
+      "to": "El Pla de Santa Maria",
+      "distance": 20292,
+      "duration": 1382
+    },
+    {
+      "from": "Montblanc",
+      "to": "Lleida",
+      "distance": 63913,
+      "duration": 2606
+    },
+    {
+      "from": "El Pla de Santa Maria",
+      "to": "El Vendrell",
+      "distance": 28293,
+      "duration": 1937
+    },
+    {
+      "from": "El Pla de Santa Maria",
+      "to": "Valls",
+      "distance": 16883,
+      "duration": 1382
+    },
+    {
+      "from": "El Pla de Santa Maria",
+      "to": "Montblanc",
+      "distance": 21174,
+      "duration": 1463
+    },
+    {
+      "from": "El Pla de Santa Maria",
+      "to": "Igualada",
+      "distance": 48806,
+      "duration": 3737
+    },
+    {
+      "from": "Lleida",
+      "to": "Montblanc",
+      "distance": 64232,
+      "duration": 2676
+    },
+    {
+      "from": "Lleida",
+      "to": "Tàrrega",
+      "distance": 49646,
+      "duration": 2313
+    },
+    {
+      "from": "Lleida",
+      "to": "Balaguer",
+      "distance": 25876,
+      "duration": 1471
+    },
+    {
+      "from": "Tàrrega",
+      "to": "Lleida",
+      "distance": 50292,
+      "duration": 2312
+    },
+    {
+      "from": "Tàrrega",
+      "to": "Igualada",
+      "distance": 46448,
+      "duration": 2021
+    },
+    {
+      "from": "Tàrrega",
+      "to": "Manresa",
+      "distance": 67471,
+      "duration": 2869
+    },
+    {
+      "from": "Tàrrega",
+      "to": "Artesa de Segre",
+      "distance": 30309,
+      "duration": 1692
+    },
+    {
+      "from": "Tàrrega",
+      "to": "Balaguer",
+      "distance": 36994,
+      "duration": 1973
+    },
+    {
+      "from": "Igualada",
+      "to": "El Pla de Santa Maria",
+      "distance": 49031,
+      "duration": 3737
+    },
+    {
+      "from": "Igualada",
+      "to": "Tàrrega",
+      "distance": 46370,
+      "duration": 1985
+    },
+    {
+      "from": "Igualada",
+      "to": "Manresa",
+      "distance": 30893,
+      "duration": 1667
+    },
+    {
+      "from": "Martorell",
+      "to": "Sant Andreu de la Barca",
+      "distance": 12755,
+      "duration": 903
+    },
+    {
+      "from": "Martorell",
+      "to": "Manresa",
+      "distance": 35536,
+      "duration": 2153
+    },
+    {
+      "from": "Vilafranca del Penedès",
+      "to": "El Vendrell",
+      "distance": 25630,
+      "duration": 1898
+    },
+    {
+      "from": "Vilafranca del Penedès",
+      "to": "Molins de Rei",
+      "distance": 41021,
+      "duration": 2364
+    },
+    {
+      "from": "Sant Andreu de la Barca",
+      "to": "Martorell",
+      "distance": 7549,
+      "duration": 1159
+    },
+    {
+      "from": "Sant Andreu de la Barca",
+      "to": "Molins de Rei",
+      "distance": 9784,
+      "duration": 1248
+    },
+    {
+      "from": "Molins de Rei",
+      "to": "Vilafranca del Penedès",
+      "distance": 39977,
+      "duration": 2167
+    },
+    {
+      "from": "Molins de Rei",
+      "to": "Sant Andreu de la Barca",
+      "distance": 11322,
+      "duration": 1259
+    },
+    {
+      "from": "Molins de Rei",
+      "to": "Barcelona",
+      "distance": 27419,
+      "duration": 2357
+    },
+    {
+      "from": "Vilanova i la Geltrú",
+      "to": "Calafell",
+      "distance": 17645,
+      "duration": 1259
+    },
+    {
+      "from": "Vilanova i la Geltrú",
+      "to": "Sitges",
+      "distance": 9020,
+      "duration": 1036
+    },
+    {
+      "from": "Sitges",
+      "to": "Vilanova i la Geltrú",
+      "distance": 8839,
+      "duration": 970
+    },
+    {
+      "from": "Sitges",
+      "to": "Castelldefels",
+      "distance": 17819,
+      "duration": 1199
+    },
+    {
+      "from": "Castelldefels",
+      "to": "Sitges",
+      "distance": 18730,
+      "duration": 1326
+    },
+    {
+      "from": "Castelldefels",
+      "to": "Barcelona",
+      "distance": 28281,
+      "duration": 2246
+    },
+    {
+      "from": "Barcelona",
+      "to": "Molins de Rei",
+      "distance": 24231,
+      "duration": 2033
+    },
+    {
+      "from": "Barcelona",
+      "to": "Castelldefels",
+      "distance": 24632,
+      "duration": 1926
+    },
+    {
+      "from": "Barcelona",
+      "to": "Mataró",
+      "distance": 34003,
+      "duration": 2397
+    },
+    {
+      "from": "Barcelona",
+      "to": "Rubí",
+      "distance": 23357,
+      "duration": 2302
+    },
+    {
+      "from": "Barcelona",
+      "to": "Sabadell",
+      "distance": 25923,
+      "duration": 1973
+    },
+    {
+      "from": "Mataró",
+      "to": "Barcelona",
+      "distance": 33730,
+      "duration": 2402
+    },
+    {
+      "from": "Mataró",
+      "to": "Granollers",
+      "distance": 24923,
+      "duration": 1710
+    },
+    {
+      "from": "Rubí",
+      "to": "Barcelona",
+      "distance": 32609,
+      "duration": 2326
+    },
+    {
+      "from": "Rubí",
+      "to": "Terrassa",
+      "distance": 9287,
+      "duration": 957
+    },
+    {
+      "from": "Sabadell",
+      "to": "Barcelona",
+      "distance": 28573,
+      "duration": 2329
+    },
+    {
+      "from": "Sabadell",
+      "to": "Terrassa",
+      "distance": 12417,
+      "duration": 1227
+    },
+    {
+      "from": "Sabadell",
+      "to": "Granollers",
+      "distance": 27417,
+      "duration": 1896
+    },
+    {
+      "from": "Terrassa",
+      "to": "Rubí",
+      "distance": 9079,
+      "duration": 956
+    },
+    {
+      "from": "Terrassa",
+      "to": "Sabadell",
+      "distance": 13118,
+      "duration": 1207
+    },
+    {
+      "from": "Terrassa",
+      "to": "Manresa",
+      "distance": 34226,
+      "duration": 2016
+    },
+    {
+      "from": "Manresa",
+      "to": "Tàrrega",
+      "distance": 67565,
+      "duration": 2853
+    },
+    {
+      "from": "Manresa",
+      "to": "Igualada",
+      "distance": 31715,
+      "duration": 1856
+    },
+    {
+      "from": "Manresa",
+      "to": "Martorell",
+      "distance": 35958,
+      "duration": 2250
+    },
+    {
+      "from": "Manresa",
+      "to": "Terrassa",
+      "distance": 34154,
+      "duration": 1981
+    },
+    {
+      "from": "Manresa",
+      "to": "Vic",
+      "distance": 51183,
+      "duration": 2447
+    },
+    {
+      "from": "Manresa",
+      "to": "Cardona",
+      "distance": 32086,
+      "duration": 1958
+    },
+    {
+      "from": "Vic",
+      "to": "Manresa",
+      "distance": 51950,
+      "duration": 2476
+    },
+    {
+      "from": "Vic",
+      "to": "Granollers",
+      "distance": 41945,
+      "duration": 2392
+    },
+    {
+      "from": "Vic",
+      "to": "Ripoll",
+      "distance": 39777,
+      "duration": 2061
+    },
+    {
+      "from": "Granollers",
+      "to": "Mataró",
+      "distance": 19114,
+      "duration": 1711
+    },
+    {
+      "from": "Granollers",
+      "to": "Sabadell",
+      "distance": 25524,
+      "duration": 1639
+    },
+    {
+      "from": "Granollers",
+      "to": "Vic",
+      "distance": 44449,
+      "duration": 2258
+    },
+    {
+      "from": "Ripoll",
+      "to": "Vic",
+      "distance": 37129,
+      "duration": 1925
+    },
+    {
+      "from": "Ripoll",
+      "to": "Berga",
+      "distance": 45804,
+      "duration": 3649
+    },
+    {
+      "from": "Berga",
+      "to": "Ripoll",
+      "distance": 46018,
+      "duration": 3704
+    },
+    {
+      "from": "Berga",
+      "to": "Solsona",
+      "distance": 42095,
+      "duration": 2893
+    },
+    {
+      "from": "Solsona",
+      "to": "Berga",
+      "distance": 44553,
+      "duration": 2973
+    },
+    {
+      "from": "Solsona",
+      "to": "Cardona",
+      "distance": 20843,
+      "duration": 1397
+    },
+    {
+      "from": "Solsona",
+      "to": "Artesa de Segre",
+      "distance": 56388,
+      "duration": 2572
+    },
+    {
+      "from": "Cardona",
+      "to": "Manresa",
+      "distance": 31938,
+      "duration": 1930
+    },
+    {
+      "from": "Cardona",
+      "to": "Solsona",
+      "distance": 21219,
+      "duration": 1423
+    },
+    {
+      "from": "Artesa de Segre",
+      "to": "Tàrrega",
+      "distance": 30089,
+      "duration": 1705
+    },
+    {
+      "from": "Artesa de Segre",
+      "to": "Solsona",
+      "distance": 54224,
+      "duration": 2729
+    },
+    {
+      "from": "Artesa de Segre",
+      "to": "Balaguer",
+      "distance": 28547,
+      "duration": 1376
+    },
+    {
+      "from": "Balaguer",
+      "to": "Lleida",
+      "distance": 25931,
+      "duration": 1476
+    },
+    {
+      "from": "Balaguer",
+      "to": "Tàrrega",
+      "distance": 36997,
+      "duration": 2036
+    },
+    {
+      "from": "Balaguer",
+      "to": "Artesa de Segre",
+      "distance": 28641,
+      "duration": 1430
+    }
+  ]
+}

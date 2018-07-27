@@ -1,4 +1,4 @@
-package model;
+package model.utils;
 
 import Model.Connection;
 import Network.DistanceParser;

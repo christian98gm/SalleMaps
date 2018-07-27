@@ -1,8 +1,8 @@
 import Model.City;
 import Model.Connection;
 import model.DestinationCity;
-import model.GoogleManager;
-import model.JsonManager;
+import model.utils.GoogleManager;
+import model.utils.JsonManager;
 import model.Route;
 import model.graph.Graph;
 import org.json.JSONException;

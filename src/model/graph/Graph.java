@@ -4,7 +4,9 @@ import Model.City;
 import Model.Connection;
 import model.DestinationCity;
 import model.Route;
+import model.avl.StringTree;
 import model.list.CustomList;
+import model.Cost;
 
 import java.util.List;
 
@@ -15,9 +17,17 @@ public class Graph {
     private AdjacencyVertex[] adjacencyList;
     private int size;
 
+    //AVL
+    private StringTree tree;
+
     public Graph() {
+
         adjacencyList = new AdjacencyVertex[DEFAULT_LENGTH];
         size = 0;
+
+        //AVL
+        tree = new StringTree();
+
     }
 
     public boolean addCity(City city) {
@@ -42,6 +52,10 @@ public class Graph {
         //Add vertex
         adjacencyList[size] = new AdjacencyVertex(city);
         size++;
+
+        //AVL
+        tree.add(city.getName());
+
         return true;
 
     }
@@ -230,6 +244,8 @@ public class Graph {
 
     private Route getRoute(City from, City to, boolean shortest) {
 
+        long init = System.nanoTime();
+
         //Null cities
         if(from == null || to == null) {
             throw new NullPointerException();
@@ -311,6 +327,8 @@ public class Graph {
             }
 
         }
+
+        System.out.print((System.nanoTime() - init) + " nanos");
 
         //Check if it's a reachable destiny
         int toIndex = indexOf(to.getName());

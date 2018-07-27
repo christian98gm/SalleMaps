@@ -1,4 +1,4 @@
-package model;
+package model.utils;
 
 import model.list.CustomList;
 import Model.City;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class JsonManager {
 
-    //model.City params
+    //City params
     private final static String CITIES = "cities";
     private final static String CITY_NAME = "name";
     private final static String CITY_ADDRESS = "address";
@@ -19,7 +19,7 @@ public class JsonManager {
     private final static String CITY_LATITUDE = "latitude";
     private final static String CITY_LONGITUDE = "longitude";
 
-    //model.Connection params
+    //Connection params
     private final static String CONNECTIONS = "connections";
     private final static String CONNECTION_FROM = "from";
     private final static String CONNECTION_TO = "to";

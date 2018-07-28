@@ -102,7 +102,6 @@ public class Menu {
         System.out.println();
         System.out.println("1. Shortest route");
         System.out.println("2. Fastest route");
-        System.out.println();
 
         //Get option
         Scanner sc = new Scanner(System.in).useDelimiter(System.lineSeparator());
@@ -191,9 +190,9 @@ public class Menu {
         System.out.println(String.format("Can't reach %s from %s", from.getName(), to.getName()));
     }
 
-    public void notifyOperationTime(long millis) {
+    public void notifyOperationTime(long nanos) {
         System.out.println();
-        System.out.println(String.format("This operation last %d ms", millis));
+        System.out.println(String.format("This operation last %.3f ms", (double) nanos / 1000000));
     }
 
     public boolean isOptionEmpty() {

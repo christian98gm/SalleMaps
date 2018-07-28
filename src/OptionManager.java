@@ -169,7 +169,7 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
                         } else {
                             graph.setMode(option);
                             if(!graph.containsCity(cityName)) {
-                                initTime = System.currentTimeMillis();
+                                initTime = System.nanoTime();
                                 error = false;
                                 connections.clear();
                                 googleManager.getNewCity(cityName, this);
@@ -250,7 +250,7 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
                 showCityData(from);
             }
 
-            menu.notifyOperationTime(System.currentTimeMillis() - initTime);
+            menu.notifyOperationTime(System.nanoTime() - initTime);
             error = false;
             connections.clear();
 
@@ -337,7 +337,7 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
 
                 int option = menu.getOptionInt();
                 Route route = null;
-                initTime = System.currentTimeMillis();
+                initTime = System.nanoTime();
 
                 switch(option) {
                     case SHORTEST:
@@ -359,7 +359,7 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
                         break;
                 }
 
-                menu.notifyOperationTime(System.currentTimeMillis() - initTime);
+                menu.notifyOperationTime(System.nanoTime() - initTime);
 
                 if(route != null) {
                     menu.showRoute(from, to, route);

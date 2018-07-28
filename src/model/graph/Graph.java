@@ -5,6 +5,7 @@ import Model.Connection;
 import model.DestinationCity;
 import model.Route;
 import model.avl.StringTree;
+import model.hash.OpenHashTable;
 import model.list.CustomList;
 import model.Cost;
 
@@ -23,8 +24,9 @@ public class Graph {
     private int size;
     private int mode;
 
-    //AVL
+    //Optimization
     private StringTree tree;
+    private OpenHashTable hashTable;
 
     public Graph() {
 
@@ -34,6 +36,7 @@ public class Graph {
         //Optimization params
         mode = NO_OPTIMIZATION;
         tree = new StringTree();
+        hashTable = new OpenHashTable();
 
     }
 
@@ -64,11 +67,12 @@ public class Graph {
 
         //Add vertex
         adjacencyList[size] = new AdjacencyVertex(city);
-        size++;
 
-        //AVL
+        //Optimization
         tree.add(city.getName());
+        hashTable.addValue(city.getName(), size);
 
+        size++;
         return true;
 
     }
@@ -86,7 +90,7 @@ public class Graph {
         String to = connection.getTo();
 
         //Check if are the same
-        if(from.equals(to)) {
+        if(from.equalsIgnoreCase(to)) {
             return false;
         }
 
@@ -109,7 +113,7 @@ public class Graph {
                 for (int i = 0; found < 2 && i < size; i++) {
 
                     //From city
-                    if(adjacencyList[i].getCity().getName().equals(from)) {
+                    if(adjacencyList[i].getCity().getName().equalsIgnoreCase(from)) {
                         if(adjacencyList[i].getSuccessor() == null) {
                             adjacencyList[i].setSuccessor(newNode);
                         } else {
@@ -123,7 +127,7 @@ public class Graph {
                     }
 
                     //To city
-                    if (adjacencyList[i].getCity().getName().equals(to)) {
+                    if (adjacencyList[i].getCity().getName().equalsIgnoreCase(to)) {
                         if (adjacencyList[i].getPredecessor() == null) {
                             adjacencyList[i].setPredecessor(newNode);
                         } else {
@@ -142,23 +146,23 @@ public class Graph {
             case AVL_OPTIMIZATION:
 
                 //Add successor
-                int fromIndex = tree.getStringIndex(from);
-                if(adjacencyList[fromIndex].getSuccessor() == null) {
-                    adjacencyList[fromIndex].setSuccessor(newNode);
+                int treeFromIndex = tree.getStringIndex(from);
+                if(adjacencyList[treeFromIndex].getSuccessor() == null) {
+                    adjacencyList[treeFromIndex].setSuccessor(newNode);
                 } else {
-                    AdjacencyNode currentNode = adjacencyList[fromIndex].getSuccessor();
-                    while (currentNode.getSuccessor() != null) {
+                    AdjacencyNode currentNode = adjacencyList[treeFromIndex].getSuccessor();
+                    while(currentNode.getSuccessor() != null) {
                         currentNode = currentNode.getSuccessor();
                     }
                     currentNode.setSuccessor(newNode);
                 }
 
                 //Add predecessor
-                int toIndex = tree.getStringIndex(to);
-                if(adjacencyList[toIndex].getPredecessor() == null) {
-                    adjacencyList[toIndex].setPredecessor(newNode);
+                int treeToIndex = tree.getStringIndex(to);
+                if(adjacencyList[treeToIndex].getPredecessor() == null) {
+                    adjacencyList[treeToIndex].setPredecessor(newNode);
                 } else {
-                    AdjacencyNode currentNode = adjacencyList[toIndex].getPredecessor();
+                    AdjacencyNode currentNode = adjacencyList[treeToIndex].getPredecessor();
                     while (currentNode.getPredecessor() != null) {
                         currentNode = currentNode.getPredecessor();
                     }
@@ -167,6 +171,31 @@ public class Graph {
 
                 break;
             case HASH_OPTIMIZATION:
+
+                //Add successor
+                int hashFromIndex = hashTable.getValue(from);
+                if(adjacencyList[hashFromIndex].getSuccessor() == null) {
+                    adjacencyList[hashFromIndex].setSuccessor(newNode);
+                } else {
+                    AdjacencyNode currentNode = adjacencyList[hashFromIndex].getSuccessor();
+                    while (currentNode.getSuccessor() != null) {
+                        currentNode = currentNode.getSuccessor();
+                    }
+                    currentNode.setSuccessor(newNode);
+                }
+
+                //Add predecessor
+                int hashToIndex = hashTable.getValue(to);
+                if(adjacencyList[hashToIndex].getPredecessor() == null) {
+                    adjacencyList[hashToIndex].setPredecessor(newNode);
+                } else {
+                    AdjacencyNode currentNode = adjacencyList[hashToIndex].getPredecessor();
+                    while (currentNode.getPredecessor() != null) {
+                        currentNode = currentNode.getPredecessor();
+                    }
+                    currentNode.setPredecessor(newNode);
+                }
+
                 break;
         }
 
@@ -184,7 +213,7 @@ public class Graph {
         switch(mode) {
             case NO_OPTIMIZATION:
                 for(int i = 0; i < size; i++) {
-                    if(adjacencyList[i].getCity().getName().equals(cityName)) {
+                    if(adjacencyList[i].getCity().getName().equalsIgnoreCase(cityName)) {
                         return true;
                     }
                 }
@@ -192,7 +221,7 @@ public class Graph {
             case AVL_OPTIMIZATION:
                 return tree.containsString(cityName);
             case HASH_OPTIMIZATION:
-                break;
+                return hashTable.containsKey(cityName);
         }
 
         return false;
@@ -203,7 +232,7 @@ public class Graph {
         switch(mode) {
             case NO_OPTIMIZATION:
                 for (int i = 0; i < size; i++) {
-                    if (adjacencyList[i].getCity().getName().equals(from)) {
+                    if (adjacencyList[i].getCity().getName().equalsIgnoreCase(from)) {
                         AdjacencyNode currentNode = adjacencyList[i].getSuccessor();
                         while (currentNode != null) {
                             if (currentNode.getConnection().getTo().equals(to)) {
@@ -215,15 +244,22 @@ public class Graph {
                 }
                 break;
             case AVL_OPTIMIZATION:
-                AdjacencyNode currentNode = adjacencyList[tree.getStringIndex(from)].getSuccessor();
-                while (currentNode != null) {
-                    if (currentNode.getConnection().getTo().equals(to)) {
+                AdjacencyNode treeCurrentNode = adjacencyList[tree.getStringIndex(from)].getSuccessor();
+                while (treeCurrentNode != null) {
+                    if (treeCurrentNode.getConnection().getTo().equalsIgnoreCase(to)) {
                         return true;
                     }
-                    currentNode = currentNode.getSuccessor();
+                    treeCurrentNode = treeCurrentNode.getSuccessor();
                 }
                 break;
             case HASH_OPTIMIZATION:
+                AdjacencyNode hashCurrentNode = adjacencyList[hashTable.getValue(from)].getSuccessor();
+                while (hashCurrentNode != null) {
+                    if (hashCurrentNode.getConnection().getTo().equalsIgnoreCase(to)) {
+                        return true;
+                    }
+                    hashCurrentNode = hashCurrentNode.getSuccessor();
+                }
                 break;
         }
         return false;
@@ -244,7 +280,7 @@ public class Graph {
         switch(mode) {
             case NO_OPTIMIZATION:
                 for(int i = 0; i < size; i++) {
-                    if(adjacencyList[i].getCity().getName().equals(cityName)) {
+                    if(adjacencyList[i].getCity().getName().equalsIgnoreCase(cityName)) {
                         return adjacencyList[i].getCity();
                     }
                 }
@@ -252,7 +288,7 @@ public class Graph {
             case AVL_OPTIMIZATION:
                 return adjacencyList[tree.getStringIndex(cityName)].getCity();
             case HASH_OPTIMIZATION:
-                break;
+                return adjacencyList[hashTable.getValue(cityName)].getCity();
         }
 
         return null;    //Never happens
@@ -278,7 +314,7 @@ public class Graph {
         switch(mode) {
             case NO_OPTIMIZATION:
                 for (int i = 0; i < size; i++) {
-                    if(adjacencyList[i].getCity().equals(city)) {
+                    if(adjacencyList[i].getCity().getName().equalsIgnoreCase(city.getName())) {
                         if(adjacencyList[i].getSuccessor() != null) {
                             AdjacencyNode currentNode;
                             currentNode = adjacencyList[i].getSuccessor();
@@ -287,7 +323,7 @@ public class Graph {
                                 DestinationCity destinationCity = new DestinationCity();
                                 String currentCity = currentConnection.getTo();
                                 for (int j = 0; j < size; j++) {
-                                    if (adjacencyList[j].getCity().getName().equals(currentCity)) {
+                                    if (adjacencyList[j].getCity().getName().equalsIgnoreCase(currentCity)) {
                                         destinationCity.setCity(adjacencyList[j].getCity());
                                         break;
                                     }
@@ -303,16 +339,16 @@ public class Graph {
                 }
                 break;
             case AVL_OPTIMIZATION:
-                int index = tree.getStringIndex(city.getName());
-                if(adjacencyList[index].getSuccessor() != null) {
+                int treeIndex = tree.getStringIndex(city.getName());
+                if(adjacencyList[treeIndex].getSuccessor() != null) {
                     AdjacencyNode currentNode;
-                    currentNode = adjacencyList[index].getSuccessor();
+                    currentNode = adjacencyList[treeIndex].getSuccessor();
                     while (currentNode != null) {
                         Connection currentConnection = currentNode.getConnection();
                         DestinationCity destinationCity = new DestinationCity();
                         String currentCity = currentConnection.getTo();
                         for (int j = 0; j < size; j++) {
-                            if (adjacencyList[j].getCity().getName().equals(currentCity)) {
+                            if (adjacencyList[j].getCity().getName().equalsIgnoreCase(currentCity)) {
                                 destinationCity.setCity(adjacencyList[j].getCity());
                                 break;
                             }
@@ -325,6 +361,26 @@ public class Graph {
                 }
                 break;
             case HASH_OPTIMIZATION:
+                int hashIndex = hashTable.getValue(city.getName());
+                if(adjacencyList[hashIndex].getSuccessor() != null) {
+                    AdjacencyNode currentNode;
+                    currentNode = adjacencyList[hashIndex].getSuccessor();
+                    while (currentNode != null) {
+                        Connection currentConnection = currentNode.getConnection();
+                        DestinationCity destinationCity = new DestinationCity();
+                        String currentCity = currentConnection.getTo();
+                        for (int j = 0; j < size; j++) {
+                            if (adjacencyList[j].getCity().getName().equalsIgnoreCase(currentCity)) {
+                                destinationCity.setCity(adjacencyList[j].getCity());
+                                break;
+                            }
+                        }
+                        destinationCity.setDistance(currentConnection.getDistance());
+                        destinationCity.setDuration(currentConnection.getDuration());
+                        list.add(destinationCity);
+                        currentNode = currentNode.getSuccessor();
+                    }
+                }
                 break;
         }
 
@@ -476,7 +532,7 @@ public class Graph {
             AdjacencyNode currentNode = from.getSuccessor();
             while(currentNode != null) {
                 Connection connection = currentNode.getConnection();
-                if(connection.getTo().equals(to.getName())) {
+                if(connection.getTo().equalsIgnoreCase(to.getName())) {
                     if(shortest) {
                         cost = connection.getDistance();
                     } else {
@@ -504,7 +560,7 @@ public class Graph {
         switch(mode) {
             case NO_OPTIMIZATION:
                 for (int i = 0; i < size; i++) {
-                    if(adjacencyList[i].getCity().getName().equals(cityName)) {
+                    if(adjacencyList[i].getCity().getName().equalsIgnoreCase(cityName)) {
                         return i;
                     }
                 }
@@ -512,7 +568,7 @@ public class Graph {
             case AVL_OPTIMIZATION:
                 return tree.getStringIndex(cityName);
             case HASH_OPTIMIZATION:
-                break;
+                return hashTable.getValue(cityName);
         }
 
         return -1;

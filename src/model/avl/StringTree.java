@@ -221,7 +221,7 @@ public class StringTree {
         StringNode currentNode = root;
 
         while(currentNode != null) {
-            if(currentNode.getString().equals(string)) {
+            if(currentNode.getString().equalsIgnoreCase(string)) {
                 return currentNode.getIndex();
             } else {
                 if(string.compareToIgnoreCase(currentNode.getString()) < 0) {

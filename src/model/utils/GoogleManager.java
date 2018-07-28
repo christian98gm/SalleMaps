@@ -8,12 +8,12 @@ import Network.WSGoogleMaps;
 import Model.City;
 import model.list.CustomList;
 
-import javax.swing.*;
 import java.util.List;
 
 public class GoogleManager {
 
-    private final static String API_KEY = "AIzaSyAprP-uJv4hnhyd_6svpjTT3S75XEp-owo";
+    private final static String API_KEY = "AIzaSyCdbJGBrFKWHjHxWMQ1_HYMnZgUQI1g9sc";
+//    private final static String API_KEY = "AIzaSyAprP-uJv4hnhyd_6svpjTT3S75XEp-owo";
 
     public final static int OK = 0;
     public final static int KO = 1;

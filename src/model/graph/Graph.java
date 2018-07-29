@@ -401,7 +401,7 @@ public class Graph {
 
         List<City> cities = new CustomList();
 
-        for(int i = to; i < from; i++) {
+        for(int i = from; i < to; i++) {
             cities.add(adjacencyList[i].getCity());
         }
 

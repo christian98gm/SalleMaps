@@ -12,8 +12,7 @@ import java.util.List;
 
 public class GoogleManager {
 
-    private final static String API_KEY = "AIzaSyCdbJGBrFKWHjHxWMQ1_HYMnZgUQI1g9sc";
-//    private final static String API_KEY = "AIzaSyAprP-uJv4hnhyd_6svpjTT3S75XEp-owo";
+    private final static String API_KEY = "AIzaSyAprP-uJv4hnhyd_6svpjTT3S75XEp-owo";
 
     public final static int OK = 0;
     public final static int KO = 1;
@@ -49,7 +48,7 @@ public class GoogleManager {
 
     }
 
-    public void getCloserDestinies(City city, List<City> destinies, ConnectionsCallback connectionsCallback, boolean lastDestiny) {
+    public void getConnections(City city, List<City> destinies, ConnectionsCallback connectionsCallback, boolean lastData) {
 
         //Prepare data
         int indices[] = new int[destinies.size()];
@@ -71,14 +70,14 @@ public class GoogleManager {
                         List<String> errors = DistanceParser.parseDistances(data, city.getName(), destinies, indices,
                                 connections);
                         if(!errors.isEmpty()) {
-                            connectionsCallback.connectionsResult(city, connections, KO, lastDestiny);
+                            connectionsCallback.connectionsResult(city, connections, KO, lastData);
                         } else {
-                            connectionsCallback.connectionsResult(city, connections, OK, lastDestiny);
+                            connectionsCallback.connectionsResult(city, connections, OK, lastData);
                         }
                     }
                     @Override
                     public void onError(String message) {
-                        connectionsCallback.connectionsResult(city, null, KO, lastDestiny);
+                        connectionsCallback.connectionsResult(city, null, KO, lastData);
                     }
                 });
 

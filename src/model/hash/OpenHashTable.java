@@ -10,7 +10,7 @@ public class OpenHashTable {
         hashTable = new HashNode[HASH_SIZE];
     }
 
-    public boolean addValue(String key, int value) {
+    public boolean add(String key, int value) {
 
         //Null key
         if(key == null) {

@@ -187,7 +187,7 @@ public class Menu {
 
     public void notifyUnreachableCity(City from, City to) {
         System.out.println();
-        System.out.println(String.format("Can't reach %s from %s", from.getName(), to.getName()));
+        System.out.println(String.format("Can't reach %s from %s", to.getName(), from.getName()));
     }
 
     public void notifyOperationTime(long nanos) {

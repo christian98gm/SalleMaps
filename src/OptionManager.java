@@ -168,8 +168,8 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
                             menu.notifyInvalidIntRange();
                         } else {
                             graph.setMode(option);
+                            initTime = System.nanoTime();
                             if(!graph.containsCity(cityName)) {
-                                initTime = System.nanoTime();
                                 error = false;
                                 connections.clear();
                                 googleManager.getNewCity(cityName, this);
@@ -200,14 +200,13 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
     public void cityResult(City city, int errorCode) {
         switch(errorCode) {
             case GoogleManager.OK:
-                List<City> cities = graph.getCities();
                 int count = 0;
-                int size = cities.size();
+                int size = graph.size();
                 while(count < size) {
                     int newCount = count + MAX_CITIES_PER_CALL;
-                    googleManager.getCloserDestinies(city,
-                            cities.subList(count, Integer.min(newCount - 1, cities.size() - 1)), this,
-                            newCount >= cities.size() - 1);
+                    googleManager.getConnections(city,
+                            graph.subList(count, Integer.min(newCount - 1, size - 1)), this,
+                            newCount >= size - 1);
                     count = newCount;
                 }
                 break;
@@ -229,14 +228,16 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
 
         if(endInformation) {
 
-            graph.addCity(from);
-            List<Connection> closerConnections = getCloserConnections(connections, MAX_CONNECTIONS);
-            for(int i = 0; i < closerConnections.size(); i++) {
-                Connection connection = closerConnections.get(i);
-                Connection returnConnection = new Connection(connection.getTo(), from.getName(),
-                        connection.getDistance(), connection.getDuration());
-                graph.addConnection(connection);
-                graph.addConnection(returnConnection);
+            if(!connections.isEmpty()) {
+                graph.addCity(from);
+                List<Connection> closerConnections = getCloserConnections(connections, MAX_CONNECTIONS);
+                for (int i = 0; i < closerConnections.size(); i++) {
+                    Connection connection = closerConnections.get(i);
+                    Connection returnConnection = new Connection(connection.getTo(), from.getName(),
+                            connection.getDistance(), connection.getDuration());
+                    graph.addConnection(connection);
+                    graph.addConnection(returnConnection);
+                }
             }
 
             Menu menu = new Menu();
@@ -245,12 +246,13 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
                 menu.notifyConnectionsError();
             }
 
+            menu.notifyOperationTime(System.nanoTime() - initTime);
+
             if(!connections.isEmpty()) {
                 menu.notifyCityAdded();
                 showCityData(from);
             }
 
-            menu.notifyOperationTime(System.nanoTime() - initTime);
             error = false;
             connections.clear();
 
@@ -341,14 +343,14 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
 
                 switch(option) {
                     case SHORTEST:
-                        route = graph.getShortestRoute(from, to);
+                        route = graph.getRoute(from, to, true);
                         if(route == null) {
                             menu.notifyUnreachableCity(from, to);
                             exit = true;
                         }
                         break;
                     case FASTEST:
-                        route = graph.getFastestRoute(from, to);
+                        route = graph.getRoute(from, to, false);
                         if(route == null) {
                             menu.notifyUnreachableCity(from, to);
                             exit = true;
@@ -359,9 +361,9 @@ public class OptionManager implements GoogleManager.CityCallback, GoogleManager.
                         break;
                 }
 
-                menu.notifyOperationTime(System.nanoTime() - initTime);
 
                 if(route != null) {
+                    menu.notifyOperationTime(System.nanoTime() - initTime);
                     menu.showRoute(from, to, route);
                     exit = true;
                 }

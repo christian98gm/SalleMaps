@@ -40,6 +40,10 @@ public class Graph {
 
     }
 
+    public int size() {
+        return size;
+    }
+
     public void setMode(int mode) {
         if(mode == NO_OPTIMIZATION || mode == AVL_OPTIMIZATION || mode == HASH_OPTIMIZATION) {
             this.mode = mode;
@@ -70,13 +74,14 @@ public class Graph {
 
         //Optimization
         tree.add(city.getName());
-        hashTable.addValue(city.getName(), size);
+        hashTable.add(city.getName(), size);
 
         size++;
         return true;
 
     }
 
+    //
     @SuppressWarnings("Duplicates")
     public boolean addConnection(Connection connection) {
 
@@ -388,11 +393,15 @@ public class Graph {
 
     }
 
-    public List<City> getCities() {
+    public List<City> subList(int from, int to) {
+
+        if(from < 0 || from >= size || to < 0 || to >= size || from > to) {
+            throw new IndexOutOfBoundsException();
+        }
 
         List<City> cities = new CustomList();
 
-        for(int i = 0; i < size; i++) {
+        for(int i = to; i < from; i++) {
             cities.add(adjacencyList[i].getCity());
         }
 
@@ -400,15 +409,7 @@ public class Graph {
 
     }
 
-    public Route getShortestRoute(City from, City to) {
-        return getRoute(from, to, true);
-    }
-
-    public Route getFastestRoute(City from, City to) {
-        return getRoute(from, to, false);
-    }
-
-    private Route getRoute(City from, City to, boolean shortest) {
+    public Route getRoute(City from, City to, boolean shortest) {
 
         //Null cities
         if(from == null || to == null) {
@@ -424,15 +425,16 @@ public class Graph {
         //Init values
         Cost costs[] = new Cost[size];
         int closerNode[] = new int[size];
-        List<Integer> vertices = new CustomList();
+        int vertices[] = new int[size];
         int fromIndex = indexOf(from.getName());
 
         for(int i = 0; i < size; i++) {
 
             if(i != fromIndex) {
-                vertices.add(i);
+                vertices[i] = i;
                 costs[i] = getCost(adjacencyList[fromIndex], adjacencyList[i].getCity(), shortest);
             } else {
+                vertices[i] = -1;
                 Cost cost = new Cost();
                 cost.setCost(0);
                 cost.setDistance(0);
@@ -457,32 +459,35 @@ public class Graph {
             int currentVertex = -1;
 
             //Find current min cost
-            for(int j = 0; j < vertices.size(); j++) {
+            for(int j = 0; j < vertices.length; j++) {
                 //Update min cost
-                int k = vertices.get(j);
-                if(minCost.getCost() == -1 || minCost.getCost() > costs[k].getCost() && costs[k].getCost() != -1) {
-                    minCost = costs[k];
-                    minIndex = k;
-                    currentVertex = j;
+                int k = vertices[j];
+                if(k != -1) {
+                    if (minCost.getCost() == -1 || minCost.getCost() > costs[k].getCost() && costs[k].getCost() != -1) {
+                        minCost = costs[k];
+                        minIndex = k;
+                        currentVertex = j;
+                    }
                 }
             }
 
             //Remove vertex
-            vertices.remove(currentVertex);
+            vertices[currentVertex] = -1;
 
             if(minCost.getCost() != -1) {
-                for(int j = 0; j < vertices.size(); j++) {
+                for(int j = 0; j < vertices.length; j++) {
 
-                    int k = vertices.get(j);
-                    Cost newCost = getCost(adjacencyList[minIndex], adjacencyList[k].getCity(), shortest);
-
-                    if(costs[k].getCost() == -1 && newCost.getCost() != -1) {
-                        costs[k] = new Cost(minCost, newCost);
-                        closerNode[k] = minIndex;
-                    } else if(costs[k].getCost() != -1 && newCost.getCost() != -1 &&
-                            minCost.getCost() + newCost.getCost() < costs[k].getCost()) {
-                        costs[k] = new Cost(minCost, newCost);
-                        closerNode[k] = minIndex;
+                    int k = vertices[j];
+                    if(k != -1) {
+                        Cost newCost = getCost(adjacencyList[minIndex], adjacencyList[k].getCity(), shortest);
+                        if (costs[k].getCost() == -1 && newCost.getCost() != -1) {
+                            costs[k] = new Cost(minCost, newCost);
+                            closerNode[k] = minIndex;
+                        } else if (costs[k].getCost() != -1 && newCost.getCost() != -1 &&
+                                minCost.getCost() + newCost.getCost() < costs[k].getCost()) {
+                            costs[k] = new Cost(minCost, newCost);
+                            closerNode[k] = minIndex;
+                        }
                     }
 
                 }
